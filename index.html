@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +8,27 @@
     <link rel="stylesheet" href="registration_numbers.css">
     <title>registration_number</title>
 </head>
+
 <body>
     <div>
         <label><strong>Registration number:</strong></label>
-        <input class="registration_number" type="text"></input>
+        <input class="reg_number" type="text"></input>
         <button class="btnAdd">ADD</button>
         <label for="towns">Select Town:</label>
-<select class="towns">
-    <option value="CA">Cape Town</option>
-  <option value="CJ">Paarl</option>
-  <option value="CT">Ceres</option>
-  <option value="CL">Stellenbosch</option>
-</select>
+        <select class="towns">
+            <option value="allTowns">All Towns</option>
+            <option value="CA">Cape Town</option>
+            <option value="CJ">Paarl</option>
+            <option value="CT">Ceres</option>
+            <option value="CL">Stellenbosch</option>
+        </select>
     </div>
-    <div class="displayReg"><span>CA 123 123</span></div>
+    <div class="container">
+        <div class="displayReg"><span>CA 123 123</span></div>
+    </div>
+
     <script src="./registration_numbers.factory.js"></script>
     <script src="./registration.js"></script>
 </body>
+
 </html>
