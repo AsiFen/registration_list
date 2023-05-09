@@ -10,23 +10,25 @@ function FactoryRegistration(storeRegistrations) {
         }
     }
 
-    function addRegistrations() {
+    
+    function addRegistrations(user_registration) {
         var list = []
-        var user_registration = validRegistration()
-        if (list[user_registration] === undefined) {
-            registration_list.push(user_registration)
-            list[user_registration] = 0
+        var valid_reg = validRegistration(user_registration)
+        if (list[valid_reg] === undefined) {
+            registration_list.push(valid_reg)
+            list[valid_reg] = 0
         }
     }
+
 
     function getRegistrations() {
         console.log(registration_list);
         return registration_list
     }
 
+
     function selectTown(dropdown_value) {
         selectedItem = []
-
         for (var i = 0; i < registration_list.length; i++) {
             var firstTwoChars = registration_list[i].charAt(0) + registration_list[i].charAt(1)
             if (dropdown_value == firstTwoChars) {
@@ -34,16 +36,22 @@ function FactoryRegistration(storeRegistrations) {
             }
             if (dropdown_value == 'allTowns') {
                 selectedItem.push(registration_list[i])
-
             }
         }
         return selectedItem
+    }
+
+    function clear() {
+        if (confirm('Are you sure you want to clear all registraations?')) {
+            localStorage.clear();
+        }
     }
 
     return {
         addRegistrations,
         getRegistrations,
         selectTown,
-        validRegistration
+        validRegistration,
+        clear
     }
 }

@@ -1,15 +1,24 @@
 .displayReg {
-
+  
     text-align: center;
-    width: 6em;
+    width: 5.5em;
     margin: 0em;
-    padding: 0.6em;
+    padding: 0.4em;
     background-color: rgb(209, 208, 205);
     border-radius: 1em;
     border: 4px solid black;
 }
 
+div {
+    margin: 1em;
+    text-align: -webkit-center;
+background-color: lightskyblue;
+}
 
 body {
-    font-size: x-large;
+    font-size: large;
+    border-radius: 1em;
+    border: 5px solid rgb(11, 38, 192);
+    margin-left: 17em;
+    margin-right: 17em;
 }
