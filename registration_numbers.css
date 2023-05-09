@@ -1,5 +1,5 @@
 .displayReg {
-  
+
     text-align: center;
     width: 5.5em;
     margin: 0em;
@@ -12,9 +12,16 @@
 div {
     margin: 1em;
     text-align: -webkit-center;
-background-color: lightskyblue;
+    background-color: lightskyblue;
 }
 
+button {
+    margin-right: 5px;
+}
+
+p{
+    font-style: italic;
+}
 body {
     font-size: large;
     border-radius: 1em;
