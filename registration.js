@@ -25,7 +25,9 @@ var factory_instance = FactoryRegistration(storeRegistrations)
 btnAdd.addEventListener('click', function () {
     var user_registration = user_registrationElem.value.trim()
     if (user_registration !== '') {
-        factory_instance.addRegistrations(user_registration)
+    
+    console.log(factory_instance.validRegistration(user_registration))
+    console.log(factory_instance.addRegistrations())
         localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
         displayRegistrations(user_registration)
     }
