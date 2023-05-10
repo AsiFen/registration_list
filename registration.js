@@ -41,6 +41,7 @@ btnAdd.addEventListener('click', function () {
     user_registrationElem.value = ''
 })
 
+
 dropdownSlected.addEventListener('change', (event) => {
     container.innerHTML = ''
     const {
