@@ -24,29 +24,43 @@ if (localStorage['user-registration']) {
 var factory_instance = FactoryRegistration(storeRegistrations)
 
 btnAdd.addEventListener('click', function () {
-    var user_registration = user_registrationElem.value.trim()
-    if (user_registration !== '') {
+    var user_registration = user_registrationElem.value.trim().toUpperCase()
+    if (user_registration == '' || user_registration == null) {
+        return alert('Please enter a vehicle registration')
+    }
+    else {
         var validRegistration = factory_instance.validRegistration(user_registration)
-        if (validRegistration !== undefined) {
-            var x = factory_instance.addRegistrations(user_registration)
-           let regs = factory_instance.getRegistrations()
-           localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
-            if (holder[regs] == undefined) {
-                displayRegistrations(regs[regs.length - 1])
-                holder[regs] = 1
+
+        if (factory_instance.errors(user_registration)) {
+
+            if (validRegistration) {
+
+                var x = factory_instance.addRegistrations(user_registration)
+                let regs = factory_instance.getRegistrations()
+                localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
+
+                if (holder[regs] == undefined) {
+                    displayRegistrations(regs[regs.length - 1])
+                    holder[regs] = 1
+                }
+            } else {
+                return alert('Invalid registration format')
             }
-            console.log(regs)
+        } else {
+            alert("Invalid registration number")
         }
     }
     user_registrationElem.value = ''
 })
 
+
+
 dropdownSlected.addEventListener('change', (event) => {
     container.innerHTML = ''
-    const {
-        value,
-    } = event.target.options[event.target.selectedIndex]
+    const { value } = event.target.options[event.target.selectedIndex]
+
     var selectedTownList = factory_instance.selectTown(value)
+
     localStorage[value] = factory_instance.selectTown(value)
     for (var i = 0; i < selectedTownList.length; i++) {
         localStorage[value] = selectedTownList[i]

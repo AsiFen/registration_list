@@ -10,28 +10,28 @@
 </head>
 
 <body>
-    <div>
+    <!-- <div>
         <p>This widget allows you to enter registration number for the four following towns,Cape Town, Ceresm Paarl and
             Stellenbosch. You can then choose to see exclusively the registrations from each town by selecting the town
             on the dropdown.</p>
-    </div>
+    </div> -->
     <div>
         <label><strong>Registration number:</strong></label>
-        <input class="reg_number" type="text"></input>
+        <input class="reg_number" type="text" placeholder="e.g CA 123 123"></input>
         <button class="btnAdd">ADD</button>
         <button class="btnClear" style="border:hidden; clear: both;">clear</button>
         <label for="towns">Select Town:</label>
         <select class="towns">
             <option value="allTowns">All Towns</option>
-            <option value="CA">Cape Town</option>
-            <option value="CJ">Paarl</option>
-            <option value="CT">Ceres</option>
-            <option value="CL">Stellenbosch</option>
+            <option value="CA">Cape Town(CA)</option>
+            <option value="CJ">Paarl(CJ)</option>
+            <option value="CT">Ceres(CT)</option>
+            <option value="CL">Stellenbosch(CL)</option>
         </select>
     </div>
 
     <div class="container">
-        <div class="displayReg"><span>CA 123 123</span></div>
+     <!-- <div class="displayReg"><span>CA 123 123</span></div> -->
     </div>
 
     <script src="./registration_numbers.factory.js"></script>

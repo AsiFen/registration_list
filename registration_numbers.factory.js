@@ -1,27 +1,32 @@
 function FactoryRegistration(storeRegistrations) {
     var registration_list = storeRegistrations || []
+
+
     var selectedItem = []
     var list = {}
 
     function validRegistration(user_registration) {
         let regExpression = /^C[ALTJ][ ]?\d{3}[- ]?\d{1,4}$/
-        if (regExpression.test(user_registration) === true) {
-            return user_registration
-        }
+        return (regExpression.test(user_registration) === true) ? true : false
+        // if (regExpression.test(user_registration) === true) {
+        //     return true
+        // }
+        // else {
+        //     return "Inv registration format"
+        // }
     }
 
-    function addRegistrations(user_registration1) {
-        var valid_reg = validRegistration(user_registration1)
-        if (list[valid_reg] == undefined) {
-            registration_list.push(valid_reg)
-            list[valid_reg] = 1
+    function addRegistrations(user_registration) {
+        console.log(registration_list[user_registration]);
+        if (registration_list[user_registration] == undefined) {
+            registration_list.push(user_registration)
+            registration_list[user_registration] = 1
         }
-        
     }
 
     function getRegMap() {
         let regMap = Object.keys(list)
-        console.log(regMap)
+        // console.log(regMap)
         return regMap
     }
     function getRegistrations() {
@@ -43,15 +48,15 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function clear() {
-        if (confirm('Are you sure you want to clear all registraations?')) {
+        if (confirm('Are you sure you want to clear all registrations?')) {
             localStorage.clear();
         }
     }
 
-    function errors() {
-
+    function errors(reg) {
+        let sub = reg.substring(3);
+        return (sub.length > 3 && sub.length < 9) ? true : false
     }
-
     return {
         addRegistrations,
         getRegistrations,
@@ -61,5 +66,4 @@ function FactoryRegistration(storeRegistrations) {
         errors,
         getRegMap
     }
-
 }
