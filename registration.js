@@ -45,6 +45,16 @@ btnAdd.addEventListener('click', function () {
                 displayRegistrations(regs[regs.length - 1])
                 holder[regs] = 1
             }
+            else{
+                errorDisplay.innerHTML = 'Registration already added!'
+                errorDisplay.style.padding = '5px'
+                errorDisplay.classList.add('green')
+                clearTimeout(errorTimeout);
+                errorTimeout = setTimeout(() => {
+                    errorDisplay.classList.remove('green')
+                    errorDisplay.innerHTML = ''
+                }, 4000)
+            }
         }
         user_registrationElem.value = ''
 
@@ -67,7 +77,7 @@ user_registrationElem.addEventListener('input', (e) => {
     // alert(e.target.value)
     var regex = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/ // Example regex to allow only letters and spaces
     if (regex.test(e.target.value)) {
-        errorDisplay.innerHTML = "Valid input.";
+        errorDisplay.innerHTML = ''
     } else {
         errorDisplay.innerHTML = factory_instance.errors(e.target.value)
         errorDisplay.style.padding = '5px'
@@ -117,6 +127,14 @@ if (storeRegistrations) {
 
 btnClear.addEventListener('click', function () {
     factory_instance.clear();
-    location.reload();
+    errorDisplayTwo.innerHTML = 'Clear Successful!'
+    errorDisplayTwo.classList.add('green')
+    errorDisplayTwo.style.padding = '5px'
+    errorTimeout = setTimeout(() => {
+        errorDisplayTwo.classList.remove('green')
+        errorDisplayTwo.innerHTML = ''
+    }, 5000)
+
+
 })
 

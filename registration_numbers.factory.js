@@ -31,8 +31,7 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function isTownSelected() {
-        return (selectedItem.length === 0) ? 'No availabe registration': ''
-
+        return (selectedItem.length === 0) ? 'No available registration': ''
         // {
         // }
         // else {

@@ -17,6 +17,15 @@
     background-color: #c91216;
     text-align: center;
 }
+.green {
+    margin: 2em;
+    color: #fff;
+    border-color: #51d82f;
+    border-radius: 10px;
+    /* padding: 5px; */
+    background-color: #3fec3f;
+    text-align: center;
+}
 
 .container {
     display: flex;
