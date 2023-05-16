@@ -2,13 +2,17 @@ var user_registrationElem = document.querySelector('.reg_number')
 var btnAdd = document.querySelector(".btnAdd")
 var btnClear = document.querySelector('.btnClear')
 var container = document.querySelector('.container')
+var errorDisplay = document.querySelector('.error')
+var errorDisplayTwo = document.querySelector('.noTown')
+
 const dropdownSlected = document.querySelector("select");
 
 let createDiv = ''
 let createSpan = ''
+let errorTimeout;
 function displayRegistrations(registration) {
     createDiv = document.createElement('div')
-    createSpan = document.createElement('SPAN')
+    createSpan = document.createElement('span')
     createSpan.textContent = registration
     createDiv.appendChild(createSpan)
     container.appendChild(createDiv)
@@ -24,48 +28,67 @@ if (localStorage['user-registration']) {
 var factory_instance = FactoryRegistration(storeRegistrations)
 
 btnAdd.addEventListener('click', function () {
+    errorDisplay.classList.remove('error')
+
     var user_registration = user_registrationElem.value.trim().toUpperCase()
-    if (user_registration == '' || user_registration == null) {
-        return alert('Please enter a vehicle registration')
-    }
-    else {
-        var validRegistration = factory_instance.validRegistration(user_registration)
+    if(factory_instance.errors(user_registration) ==  true){
 
-        if (factory_instance.errors(user_registration)) {
+    var validRegistration = factory_instance.validRegistration(user_registration)
 
-            if (validRegistration) {
+    if (validRegistration) {
 
-                var x = factory_instance.addRegistrations(user_registration)
-                let regs = factory_instance.getRegistrations()
-                localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
+        var x = factory_instance.addRegistrations(user_registration)
+        let regs = factory_instance.getRegistrations()
+        localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
 
-                if (holder[regs] == undefined) {
-                    displayRegistrations(regs[regs.length - 1])
-                    holder[regs] = 1
-                }
-            } else {
-                return alert('Invalid registration format')
-            }
-        } else {
-            alert("Invalid registration number")
+        if (holder[regs] == undefined) {
+            displayRegistrations(regs[regs.length - 1])
+            holder[regs] = 1
         }
     }
     user_registrationElem.value = ''
+}
+    else{
+        var message = factory_instance.errors(user_registration)
+        errorDisplay.innerHTML = message 
+        errorDisplay.style.padding = '5px'
+        errorDisplay.classList.add('error')
+        
+          // stop any current timeouts
+    clearTimeout(errorTimeout);
+
+    errorTimeout = setTimeout(() => {
+        errorDisplay.classList.remove('error')
+        errorDisplay.innerHTML = ''
+    }, 4000)
+    }
 })
 
 
-
 dropdownSlected.addEventListener('change', (event) => {
+    errorDisplayTwo.classList.remove('error')
     container.innerHTML = ''
     const { value } = event.target.options[event.target.selectedIndex]
-
     var selectedTownList = factory_instance.selectTown(value)
-
     localStorage[value] = factory_instance.selectTown(value)
+//  alert(factory_instance.isTownSelected())
     for (var i = 0; i < selectedTownList.length; i++) {
         localStorage[value] = selectedTownList[i]
         displayRegistrations(selectedTownList[i])
     }
+    clearTimeout(errorTimeout);
+
+    errorDisplayTwo.innerHTML = factory_instance.isTownSelected() 
+    errorDisplayTwo.style.padding = '5px'
+    errorDisplayTwo.classList.add('error')
+    
+      // stop any current timeouts
+clearTimeout(errorTimeout);
+
+errorTimeout = setTimeout(() => {
+    errorDisplayTwo.classList.remove('error')
+    errorDisplayTwo.innerHTML = ''
+}, 2000)
 })
 
 if (storeRegistrations) {
@@ -78,3 +101,4 @@ btnClear.addEventListener('click', function () {
     factory_instance.clear();
     location.reload();
 })
+

@@ -6,20 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="registration_numbers.css">
+     <!-- Compiled and minified CSS -->
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <Compiled and minified JavaScript -->
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+
     <title>registration_number</title>
 </head>
 
 <body>
-    <!-- <div>
-        <p>This widget allows you to enter registration number for the four following towns,Cape Town, Ceresm Paarl and
-            Stellenbosch. You can then choose to see exclusively the registrations from each town by selecting the town
-            on the dropdown.</p>
-    </div> -->
-    <div>
-        <label><strong>Registration number:</strong></label>
-        <input class="reg_number" type="text" placeholder="e.g CA 123 123"></input>
+
+    <div class="div">
+        <strong>
+            <h1> Vehicle Registration List</h1>
+        </strong>
+        <p>Enter a vehicle registration below from Cape Town, Ceres, Paarl or Bellville.</p>
+
+
+        <input class="reg_number" type="text" placeholder="enter registration"></input>
         <button class="btnAdd">ADD</button>
-        <button class="btnClear" style="border:hidden; clear: both;">clear</button>
+    </div>
+
+    <div class="div"><span class="error"></span></div>
+
+    <div class='div'>
         <label for="towns">Select Town:</label>
         <select class="towns">
             <option value="allTowns">All Towns</option>
@@ -28,11 +40,14 @@
             <option value="CT">Ceres(CT)</option>
             <option value="CL">Stellenbosch(CL)</option>
         </select>
+        <button class="btnClear">Clear?</button>
     </div>
 
-    <div class="container">
-     <!-- <div class="displayReg"><span>CA 123 123</span></div> -->
+    <div class="container div">
+
+        <!-- <div class="displayReg"><span>CA 123 123</span></div> -->
     </div>
+    <div class="div"><span class="error noTown"></span></div>
 
     <script src="./registration_numbers.factory.js"></script>
     <script src="./registration.js"></script>

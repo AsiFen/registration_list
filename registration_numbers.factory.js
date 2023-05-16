@@ -1,19 +1,12 @@
 function FactoryRegistration(storeRegistrations) {
     var registration_list = storeRegistrations || []
 
-
     var selectedItem = []
-    var list = {}
 
     function validRegistration(user_registration) {
-        let regExpression = /^C[ALTJ][ ]?\d{3}[- ]?\d{1,4}$/
+        let regExpression = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/
         return (regExpression.test(user_registration) === true) ? true : false
-        // if (regExpression.test(user_registration) === true) {
-        //     return true
-        // }
-        // else {
-        //     return "Inv registration format"
-        // }
+
     }
 
     function addRegistrations(user_registration) {
@@ -24,11 +17,6 @@ function FactoryRegistration(storeRegistrations) {
         }
     }
 
-    function getRegMap() {
-        let regMap = Object.keys(list)
-        // console.log(regMap)
-        return regMap
-    }
     function getRegistrations() {
         return registration_list
     }
@@ -37,14 +25,16 @@ function FactoryRegistration(storeRegistrations) {
         selectedItem = []
         for (var i = 0; i < registration_list.length; i++) {
             var firstTwoChars = registration_list[i].charAt(0) + registration_list[i].charAt(1)
-            if (dropdown_value == firstTwoChars) {
+            if (dropdown_value == firstTwoChars || dropdown_value == 'allTowns') {
                 selectedItem.push(registration_list[i])
             }
-            if (dropdown_value == 'allTowns') {
-                selectedItem.push(registration_list[i])
-            }
+        } return selectedItem
+    }
+
+    function isTownSelected() {
+        if (selectedItem.length == 0) {
+            return 'No availabe registration'
         }
-        return selectedItem
     }
 
     function clear() {
@@ -54,16 +44,44 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function errors(reg) {
+        let errorMessage;
         let sub = reg.substring(3);
-        return (sub.length > 3 && sub.length < 9) ? true : false
+        let indicator = reg.charAt(1)
+        if (reg == '' || reg == null) {
+            errorMessage = 'Please enter a vehicle registration'
+            return errorMessage
+        }
+        if (sub.length < 4) {
+            errorMessage = 'Must have more than 4 numerical digits'
+            return errorMessage
+        }
+        if (sub.length > 7) {
+            errorMessage = 'Must have less than 8 numerical digits'
+            return errorMessage
+        }
+        if (reg.charAt(0) !== 'C') {
+            errorMessage = 'Registration must start be from Western Cape'
+            return errorMessage
+        }
+        if (['A', 'L', 'T', 'J'].includes(indicator) == false) {
+            errorMessage = 'Registration must start be from Cape Town, Bellvile, Ceres or Paarl'
+            return errorMessage
+        }
+        else {
+            return true
+        }
     }
+
+
     return {
         addRegistrations,
         getRegistrations,
         selectTown,
+        isTownSelected,
         validRegistration,
         clear,
-        errors,
-        getRegMap
+        errors
     }
+
 }
+var factory_instance = FactoryRegistration(['CA 123 123'])
