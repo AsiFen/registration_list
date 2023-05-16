@@ -10,7 +10,6 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function addRegistrations(user_registration) {
-        console.log(registration_list[user_registration]);
         if (registration_list[user_registration] == undefined) {
             registration_list.push(user_registration)
             registration_list[user_registration] = 1
@@ -32,9 +31,14 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function isTownSelected() {
-        if (selectedItem.length == 0) {
-            return 'No availabe registration'
-        }
+        return (selectedItem.length === 0) ? 'No availabe registration': ''
+
+        // {
+        // }
+        // else {
+        //     return true
+        //     // return 'There are '+ selectedItem.length+ ' registration(s).'
+        // }
     }
 
     function clear() {
@@ -46,17 +50,11 @@ function FactoryRegistration(storeRegistrations) {
     function errors(reg) {
         let errorMessage;
         let sub = reg.substring(3);
+      //  let parsedNto = parseInt(sub)
         let indicator = reg.charAt(1)
+
         if (reg == '' || reg == null) {
             errorMessage = 'Please enter a vehicle registration'
-            return errorMessage
-        }
-        if (sub.length < 4) {
-            errorMessage = 'Must have more than 4 numerical digits'
-            return errorMessage
-        }
-        if (sub.length > 7) {
-            errorMessage = 'Must have less than 8 numerical digits'
             return errorMessage
         }
         if (reg.charAt(0) !== 'C') {
@@ -67,6 +65,20 @@ function FactoryRegistration(storeRegistrations) {
             errorMessage = 'Registration must start be from Cape Town, Bellvile, Ceres or Paarl'
             return errorMessage
         }
+        if (sub.length < 4) {
+            errorMessage = 'Must have more than 4 numerical digits'
+            return errorMessage
+        }
+        if (sub.length > 7) {
+            errorMessage = 'Must have less than 8 numerical digits'
+            return errorMessage
+        }
+       
+        if (validRegistration(reg) == false) {
+            errorMessage = 'Enter valid registration. In this format CA 123 123'
+            return errorMessage
+        }
+
         else {
             return true
         }
