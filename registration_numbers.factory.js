@@ -12,7 +12,7 @@ function FactoryRegistration(storeRegistrations) {
     function addRegistrations(user_registration) {
         if (registration_list[user_registration] == undefined) {
             registration_list.push(user_registration)
-            registration_list[user_registration] = 1
+            registration_list[user_registration] = 0
         }
     }
 
@@ -31,17 +31,11 @@ function FactoryRegistration(storeRegistrations) {
     }
 
     function isTownSelected() {
-        return (selectedItem.length === 0) ? 'No available registration': ''
-        // {
-        // }
-        // else {
-        //     return true
-        //     // return 'There are '+ selectedItem.length+ ' registration(s).'
-        // }
+        return (selectedItem.length === 0) ? 'No available registration' : ''
     }
 
     function clear() {
-        if (confirm('Are you sure you want to clear all registrations?')) {
+        if (confirm('Are you sure you want to clear all registrations?') ) {
             localStorage.clear();
         }
     }
@@ -49,40 +43,30 @@ function FactoryRegistration(storeRegistrations) {
     function errors(reg) {
         let errorMessage;
         let sub = reg.substring(3);
-      //  let parsedNto = parseInt(sub)
-        let indicator = reg.charAt(1)
-
+        //  let parsedNto = parseInt(sub)
+        let indicator = reg.charAt(1).toUpperCase()
         if (reg == '' || reg == null) {
             errorMessage = 'Please enter a vehicle registration'
             return errorMessage
         }
-        if (reg.charAt(0) !== 'C') {
-            errorMessage = 'Registration must start be from Western Cape'
+        if (reg.charAt(0).toLowerCase() !== 'c') {
+            errorMessage = 'Registration must start with C'
             return errorMessage
         }
         if (['A', 'L', 'T', 'J'].includes(indicator) == false) {
-            errorMessage = 'Registration must start be from Cape Town, Bellvile, Ceres or Paarl'
+            errorMessage = 'Registration must be from Cape Town(CA), Stellenbosch(CL), Ceres(CT) or Paarl(CJ)'
             return errorMessage
         }
         if (sub.length < 4) {
-            errorMessage = 'Must have more than 4 numerical digits'
+            errorMessage = 'Registration is too short.'
             return errorMessage
         }
         if (sub.length > 7) {
-            errorMessage = 'Must have less than 8 numerical digits'
+            errorMessage = 'Registration is too long.'
             return errorMessage
         }
-       
-        if (validRegistration(reg) == false) {
-            errorMessage = 'Enter valid registration. In this format CA 123 123'
-            return errorMessage
-        }
-
-        else {
-            return true
-        }
+        return ''
     }
-
 
     return {
         addRegistrations,
@@ -95,4 +79,3 @@ function FactoryRegistration(storeRegistrations) {
     }
 
 }
-var factory_instance = FactoryRegistration(['CA 123 123'])

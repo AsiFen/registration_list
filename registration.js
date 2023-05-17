@@ -19,8 +19,32 @@ function displayRegistrations(registration) {
     container.appendChild(createDiv)
     createDiv.classList.add('displayReg')
 }
+
+function displayMessages1(message, className) {
+    errorDisplay.innerHTML = message
+    errorDisplay.style.padding = '5px'
+    errorDisplay.classList.add(className)
+    clearTimeout(errorTimeout);
+    errorTimeout = setTimeout(() => {
+        errorDisplay.classList.remove(className)
+        errorDisplay.innerHTML = ''
+    }, 3000)
+}
+function displayMessages2(message, className) {
+    errorDisplayTwo.innerHTML = message
+    errorDisplayTwo.style.padding = '5px'
+    errorDisplayTwo.classList.add(className)
+    clearTimeout(errorTimeout);
+    errorTimeout = setTimeout(() => {
+        errorDisplayTwo.classList.remove(className)
+        errorDisplayTwo.innerHTML = ''
+    }, 3000)
+}
+
 var storeRegistrations = [];
 var holder = {}
+
+
 
 if (localStorage['user-registration']) {
     storeRegistrations = JSON.parse(localStorage['user-registration'])
@@ -32,7 +56,7 @@ btnAdd.addEventListener('click', function () {
     errorDisplay.classList.remove('error')
 
     var user_registration = user_registrationElem.value.trim().toUpperCase()
-    if (factory_instance.errors(user_registration) == true) {
+    if (factory_instance.errors(user_registration) == '') {
         var validRegistration = factory_instance.validRegistration(user_registration)
 
         if (validRegistration) {
@@ -45,48 +69,25 @@ btnAdd.addEventListener('click', function () {
                 displayRegistrations(regs[regs.length - 1])
                 holder[regs] = 1
             }
-            else{
-                errorDisplay.innerHTML = 'Registration already added!'
-                errorDisplay.style.padding = '5px'
-                errorDisplay.classList.add('green')
-                clearTimeout(errorTimeout);
-                errorTimeout = setTimeout(() => {
-                    errorDisplay.classList.remove('green')
-                    errorDisplay.innerHTML = ''
-                }, 4000)
+            else {
+                displayMessages1('Registration has already been added.', 'green')
             }
         }
         user_registrationElem.value = ''
-
     }
 
     else {
         var message = factory_instance.errors(user_registration)
-        errorDisplay.innerHTML = message
-        errorDisplay.style.padding = '5px'
-        errorDisplay.classList.add('error')
-        clearTimeout(errorTimeout);
-        errorTimeout = setTimeout(() => {
-            errorDisplay.classList.remove('error')
-            errorDisplay.innerHTML = ''
-        }, 4000)
+        displayMessages1(message, 'error')
     }
 })
 
 user_registrationElem.addEventListener('input', (e) => {
-    // alert(e.target.value)
     var regex = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/ // Example regex to allow only letters and spaces
     if (regex.test(e.target.value)) {
         errorDisplay.innerHTML = ''
     } else {
-        errorDisplay.innerHTML = factory_instance.errors(e.target.value)
-        errorDisplay.style.padding = '5px'
-        errorDisplay.classList.add('error')
-        clearTimeout(errorTimeout);
-        errorTimeout = setTimeout(() => {
-            errorDisplay.classList.remove('error')
-            errorDisplay.innerHTML = ''
-        }, 2000)
+        displayMessages1(factory_instance.errors(e.target.value), 'error')
     }
 
 })
@@ -107,15 +108,7 @@ dropdownSlected.addEventListener('change', (event) => {
     }
     else {
         clearTimeout(errorTimeout);
-        errorDisplayTwo.innerHTML = factory_instance.isTownSelected()
-        errorDisplayTwo.style.padding = '5px'
-        errorDisplayTwo.classList.add('error')
-        // stop any current timeouts
-        errorTimeout = setTimeout(() => {
-            errorDisplayTwo.classList.remove('error')
-            errorDisplayTwo.innerHTML = ''
-        }, 2000)
-
+        displayMessages2(factory_instance.isTownSelected(), 'error')
     }
 })
 
@@ -125,16 +118,9 @@ if (storeRegistrations) {
     }
 }
 
-btnClear.addEventListener('click', function () {
+btnClear.addEventListener('click', function (event) {
+    event.preventDefault();
     factory_instance.clear();
-    errorDisplayTwo.innerHTML = 'Clear Successful!'
-    errorDisplayTwo.classList.add('green')
-    errorDisplayTwo.style.padding = '5px'
-    errorTimeout = setTimeout(() => {
-        errorDisplayTwo.classList.remove('green')
-        errorDisplayTwo.innerHTML = ''
-    }, 5000)
-
-
+    displayMessages2('Reset successful!', 'green')
 })
 
