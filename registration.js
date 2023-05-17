@@ -21,18 +21,26 @@ function displayRegistrations(registration) {
 }
 
 function displayMessages1(message, className) {
-    errorDisplay.innerHTML = message
-    errorDisplay.style.padding = '5px'
-    errorDisplay.classList.add(className)
+    if (message) {
+        errorDisplay.innerHTML = message
+        errorDisplay.style.padding = '5px'
+        errorDisplay.classList.add(className)
+        errorDisplay.classList.remove('hidden')
+    } else{
+        errorDisplay.innerHTML = '';
+        errorDisplay.classList.add('hidden')
+    }
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(() => {
         errorDisplay.classList.remove(className)
         errorDisplay.innerHTML = ''
+        errorDisplay.classList.add('hidden')
     }, 3000)
 }
 function displayMessages2(message, className) {
     errorDisplayTwo.innerHTML = message
     errorDisplayTwo.style.padding = '5px'
+
     errorDisplayTwo.classList.add(className)
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(() => {
