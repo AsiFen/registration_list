@@ -26,8 +26,7 @@ function displayMessages1(message, className) {
         errorDisplay.style.padding = '5px'
         errorDisplay.classList.add(className)
         errorDisplay.classList.remove('hidden')
-    } else{
-        clearTimeout(errorTimeout);
+    } else {
         errorDisplay.classList.add('hidden')
     }
     clearTimeout(errorTimeout);
@@ -47,7 +46,7 @@ function displayMessages2(message, className) {
     errorTimeout = setTimeout(() => {
         errorDisplayTwo.classList.remove(className)
         errorDisplayTwo.innerHTML = ''
-    }, 3000)
+    }, 1000)
 }
 
 var storeRegistrations = [];
@@ -128,10 +127,11 @@ if (storeRegistrations) {
 }
 
 btnClear.addEventListener('click', function () {
-   if( factory_instance.clear() ==true){
-   displayMessages2('Reset successful!', 'green')
+    factory_instance.clear()
+    displayMessages2('Reset successful!', 'green')
+    setTimeout(() => {
+        location.reload()
+    }, 6000)
 
-   }
-   location.reload()
 })
 
