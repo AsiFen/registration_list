@@ -37,7 +37,9 @@ function FactoryRegistration(storeRegistrations) {
     function clear() {
         if (confirm('Are you sure you want to clear all registrations?') ) {
             localStorage.clear();
+            return true
         }
+
     }
 
     function errors(reg) {

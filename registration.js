@@ -27,11 +27,12 @@ function displayMessages1(message, className) {
         errorDisplay.classList.add(className)
         errorDisplay.classList.remove('hidden')
     } else{
-        errorDisplay.innerHTML = '';
+        clearTimeout(errorTimeout);
         errorDisplay.classList.add('hidden')
     }
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(() => {
+        errorDisplay.style.padding = ''
         errorDisplay.classList.remove(className)
         errorDisplay.innerHTML = ''
         errorDisplay.classList.add('hidden')
@@ -126,9 +127,11 @@ if (storeRegistrations) {
     }
 }
 
-btnClear.addEventListener('click', function (event) {
-    event.preventDefault();
-    factory_instance.clear();
-    displayMessages2('Reset successful!', 'green')
+btnClear.addEventListener('click', function () {
+   if( factory_instance.clear() ==true){
+   displayMessages2('Reset successful!', 'green')
+
+   }
+   location.reload()
 })
 
