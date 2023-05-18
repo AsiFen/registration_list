@@ -22,31 +22,37 @@ function displayRegistrations(registration) {
 
 function displayMessages1(message, className) {
     if (message) {
+        console.log(".")
         errorDisplay.innerHTML = message
         errorDisplay.style.padding = '5px'
         errorDisplay.classList.add(className)
         errorDisplay.classList.remove('hidden')
     } else {
+        // alert("!");
         errorDisplay.classList.add('hidden')
+        errorDisplay.style.padding = '0px'
     }
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(() => {
+        errorDisplay.classList.add('hidden')
         errorDisplay.style.padding = ''
         errorDisplay.classList.remove(className)
         errorDisplay.innerHTML = ''
-        errorDisplay.classList.add('hidden')
     }, 3000)
 }
+
 function displayMessages2(message, className) {
     errorDisplayTwo.innerHTML = message
-    errorDisplayTwo.style.padding = '5px'
+    errorDisplayTwo.style.padding = '15px'
 
     errorDisplayTwo.classList.add(className)
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(() => {
         errorDisplayTwo.classList.remove(className)
         errorDisplayTwo.innerHTML = ''
-    }, 1000)
+        errorDisplayTwo.style.padding = '0px'
+
+    }, 2000)
 }
 
 var storeRegistrations = [];
@@ -93,6 +99,8 @@ btnAdd.addEventListener('click', function () {
 user_registrationElem.addEventListener('input', (e) => {
     var regex = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/ // Example regex to allow only letters and spaces
     if (regex.test(e.target.value)) {
+        errorDisplay.classList.add('hidden')
+        errorDisplay.style.padding = '0px'
         errorDisplay.innerHTML = ''
     } else {
         displayMessages1(factory_instance.errors(e.target.value), 'error')
@@ -127,11 +135,14 @@ if (storeRegistrations) {
 }
 
 btnClear.addEventListener('click', function () {
-    factory_instance.clear()
+    // setTimeout(() => {
+        
+    // }, 5000) 
+     factory_instance.clear()
     displayMessages2('Reset successful!', 'green')
-    setTimeout(() => {
-        location.reload()
-    }, 6000)
+  createDiv.innerHTML= ''
+  container.innerHTML = ''
+    // location.reload()
 
 })
 
