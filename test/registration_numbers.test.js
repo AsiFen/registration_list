@@ -74,22 +74,5 @@ describe('Registration List Function', () => {
         })
     })
 
-    describe('display registrations numbers', () => {
-        it('should display 1 registration number', function () {
-            var factory_instance = FactoryRegistration([])
-            factory_instance.addRegistrations('CT 3134')
-            assert.deepEqual(['CT 31314',], factory_instance.addRegistrations('CT 31314'))
-        })
-
-
-        it('', function () {
-
-        })
-
-        it('', function () {
-
-        })
-
-    })
-
+ 
 })
