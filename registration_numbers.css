@@ -1,6 +1,6 @@
 .displayReg {
     text-align: center;
-    width: 5.5em;
+    width: 6.5em;
     margin: 1em;
     padding: 0.4em;
     background-color: rgb(209, 208, 205);
@@ -9,6 +9,16 @@
 }
 
 .error {
+    /* margin: 2em; */
+    color: #fff;
+    border-color: #e66062;
+    border-radius: 10px;
+    /* padding: 5px; */
+    background-color: crimson;
+    text-align: center;
+}
+
+.anerror {
     /* margin: 2em; */
     color: #fff;
     border-color: #e66062;

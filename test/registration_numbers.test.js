@@ -62,7 +62,7 @@ describe('Registration List Function', () => {
             factory_instance.getRegistrations()
             assert.deepEqual(['CT 654 321'], factory_instance.selectTown('CT'))
         })
-
+        
         it('return no registration from selected town', () => {
             var factory_instance = FactoryRegistration(['CA 123-123'])
             factory_instance.addRegistrations('CA 1234')

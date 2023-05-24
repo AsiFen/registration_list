@@ -1,16 +1,15 @@
 var user_registrationElem = document.querySelector('.reg_number')
-const inputs = document.querySelector("input");
 var btnAdd = document.querySelector(".btnAdd")
 var btnClear = document.querySelector('.btnClear')
 var container = document.querySelector('.container')
 var errorDisplay = document.querySelector('.error')
 var errorDisplayTwo = document.querySelector('.noTown')
 
-const dropdownSlected = document.querySelector("select");
+var dropdownSlected = document.querySelector("select");
 
-let createDiv = ''
-let createSpan = ''
-let errorTimeout;
+var createDiv = ''
+var createSpan = ''
+var errorTimeout;
 function displayRegistrations(registration) {
     createDiv = document.createElement('div')
     createSpan = document.createElement('span')
@@ -22,13 +21,11 @@ function displayRegistrations(registration) {
 
 function displayMessages1(message, className) {
     if (message) {
-        console.log(".")
         errorDisplay.innerHTML = message
         errorDisplay.style.padding = '5px'
         errorDisplay.classList.add(className)
         errorDisplay.classList.remove('hidden')
     } else {
-        // alert("!");
         errorDisplay.classList.add('hidden')
         errorDisplay.style.padding = '0px'
     }
@@ -76,7 +73,7 @@ btnAdd.addEventListener('click', function () {
         if (validRegistration) {
 
             var x = factory_instance.addRegistrations(user_registration)
-            let regs = factory_instance.getRegistrations()
+            var regs = factory_instance.getRegistrations()
             localStorage['user-registration'] = JSON.stringify(factory_instance.getRegistrations())
 
             if (holder[regs] == undefined) {
@@ -97,7 +94,7 @@ btnAdd.addEventListener('click', function () {
 })
 
 user_registrationElem.addEventListener('input', (e) => {
-    var regex = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/ // Example regex to allow only letters and spaces
+    var regex = /^C[ALTJ][ ]\d{3}[- ]?\d{1,3}$/ // Example regex to allow only varters and spaces
     if (regex.test(e.target.value)) {
         errorDisplay.classList.add('hidden')
         errorDisplay.style.padding = '0px'
@@ -111,8 +108,10 @@ user_registrationElem.addEventListener('input', (e) => {
 dropdownSlected.addEventListener('change', (event) => {
     errorDisplayTwo.classList.remove('error')
     container.innerHTML = ''
-    const { value } = event.target.options[event.target.selectedIndex]
+    var { value } = event.target.options[event.target.selectedIndex]
+    console.log(value);
     var selectedTownList = factory_instance.selectTown(value)
+    console.log(selectedTownList);
     localStorage[value] = factory_instance.selectTown(value)
     console.log((factory_instance.isTownSelected()));
 
@@ -135,14 +134,12 @@ if (storeRegistrations) {
 }
 
 btnClear.addEventListener('click', function () {
-    // setTimeout(() => {
-        
-    // }, 5000) 
-     factory_instance.clear()
-    displayMessages2('Reset successful!', 'green')
-  createDiv.innerHTML= ''
-  container.innerHTML = ''
+  
+    if (confirm('Are you sure you want to clear all registrations?') ) {
+        localStorage.clear();
+        displayMessages2('Reset successful!', 'green')
+
+    }
     // location.reload()
 
 })
-
