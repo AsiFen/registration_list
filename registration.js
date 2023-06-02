@@ -137,6 +137,8 @@ clear.addEventListener('click', function () {
 
     if (confirm('Are you sure you want to clear all registrations?')) {
         localStorage.removeItem('user-registration');
+        container.innerHTML = ''
+
         displayMessages2('Reset successful!', 'green')
     }
     setTimeout(() => {
