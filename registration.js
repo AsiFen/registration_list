@@ -1,6 +1,6 @@
 var user_registrationElem = document.querySelector('.reg_number')
 var btnAdd = document.querySelector(".btnAdd")
-var btnClear = document.querySelector('.btnClear')
+var clear = document.querySelector('.btnClear')
 var container = document.querySelector('.container')
 var errorDisplay = document.querySelector('.error')
 var errorDisplayTwo = document.querySelector('.noTown')
@@ -133,9 +133,9 @@ if (storeRegistrations) {
     }
 }
 
-btnClear.addEventListener('click', function () {
-  
-    if (confirm('Are you sure you want to clear all registrations?') ) {
+clear.addEventListener('click', function () {
+
+    if (confirm('Are you sure you want to clear all registrations?')) {
         localStorage.clear();
         displayMessages2('Reset successful!', 'green')
 
