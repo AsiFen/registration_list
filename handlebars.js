@@ -116,14 +116,13 @@ dropdown.addEventListener('change', (event) => {
             localStorage[value] = townSelectedList[i]
             toDisplay = townSelectedList[i]
         }
-        displayTemplate.innerHTML = ''
 
         useTemplate = templateFunction({ keepRegs: townSelectedList })
         displayTemplate.innerHTML = useTemplate
     }
     else {
         clearTimeout(errorTimeout1);    
-            useTemplate.innerHTML = ''
+        displayTemplate.innerHTML = ''
 
         messageDisplay2(factoryFunction.isTownSelected(), 'error')
     }
