@@ -136,10 +136,11 @@ if (storeRegistrations) {
 clear.addEventListener('click', function () {
 
     if (confirm('Are you sure you want to clear all registrations?')) {
-        localStorage.clear();
+        localStorage.removeItem('user-registration');
         displayMessages2('Reset successful!', 'green')
-
     }
-    // location.reload()
+    setTimeout(() => {
+        location.reload()
 
+    }, 2100)
 })

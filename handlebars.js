@@ -13,14 +13,7 @@ let create_div = ''
 let create_span = ''
 let errorTimeout1;
 var useTemplate = ''
-function registrationDisplay(registration) {
-    // create_div = document.createElement('div')
-    // create_span = document.createElement('span')
-    // create_span.textContent = registration
-    // create_div.appendChild(create_span)
-    // displayTemplate.appendChild(create_div)
-    // create_div.classList.add('displayReg')
-}
+
 
 function messageDisplay1(message, className) {
     if (message) {
@@ -43,9 +36,9 @@ function messageDisplay1(message, className) {
 
 function messageDisplay2(message, className) {
     if (message) {
-    err_display2.innerHTML = message
-    err_display2.style.padding = '15px'
-    err_display2.classList.add(className)
+        err_display2.innerHTML = message
+        err_display2.style.padding = '15px'
+        err_display2.classList.add(className)
     }
     clearTimeout(errorTimeout1);
     errorTimeout1 = setTimeout(() => {
@@ -121,7 +114,7 @@ dropdown.addEventListener('change', (event) => {
         displayTemplate.innerHTML = useTemplate
     }
     else {
-        clearTimeout(errorTimeout1);    
+        clearTimeout(errorTimeout1);
         displayTemplate.innerHTML = ''
 
         messageDisplay2(factoryFunction.isTownSelected(), 'error')
@@ -135,7 +128,10 @@ dropdown.addEventListener('change', (event) => {
 // }
 
 btnClear1.addEventListener('click', function () {
-    factoryFunction.clear();
+
+    if (confirm('Are you sure you want to clear all registrations?')) {
+        localStorage.removeItem('user-reg');
+    }
     // templateReg.innerHTML = '' // ayisebenzi le, find out why.
     displayTemplate.innerHTML = ''
     messageDisplay2('Reset successful!', 'green')
@@ -144,10 +140,7 @@ btnClear1.addEventListener('click', function () {
         location.reload()
 
     }, 2100)
-    // event.preventDefault();
 
-    // create_div.innerHTML = ''
-    // displayTemplate.innerHTML = ''
 })
 
 useTemplate = templateFunction({ keepRegs: storeList })

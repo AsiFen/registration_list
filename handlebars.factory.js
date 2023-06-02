@@ -34,11 +34,7 @@ function RegistrationFactory(storeRegistrations) {
         return (selectedItem.length === 0) ? 'No available registration' : ''
     }
 
-    function clear() {
-        if (confirm('Are you sure you want to clear all registrations?') ) {
-            localStorage.clear();
-        }
-    }
+ 
 
     function errors(reg) {
         let errorMessage;
@@ -74,7 +70,6 @@ function RegistrationFactory(storeRegistrations) {
         selectTown,
         isTownSelected,
         validRegistration,
-        clear,
         errors
     }
 
