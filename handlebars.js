@@ -1,7 +1,7 @@
 var user_registrationElement = document.querySelector('.reg_number1')
 var btnAdd1 = document.querySelector(".addBtn")
 var btnClear1 = document.querySelector('.clear')
-var displayTemplate = document.querySelector('.container1')
+var big = document.querySelector('.container1')
 var err_display = document.querySelector('.anerror')
 var err_display2 = document.querySelector('.towny')
 var templateReg = document.querySelector('.regTemplate').innerHTML
@@ -116,11 +116,9 @@ dropdown.addEventListener('change', (event) => {
             localStorage[value] = townSelectedList[i]
             toDisplay = townSelectedList[i]
         }
-        displayTemplate.innerHTML = 0
+        displayTemplate.innerHTML = ''
 
-        console.log(useTemplate);
         useTemplate = templateFunction({ keepRegs: townSelectedList })
-        console.log(useTemplate);
         displayTemplate.innerHTML = useTemplate
     }
     else {
@@ -139,6 +137,8 @@ dropdown.addEventListener('change', (event) => {
 
 btnClear1.addEventListener('click', function () {
     factoryFunction.clear();
+    // templateReg.innerHTML = '' // ayisebenzi le, find out why.
+    displayTemplate.innerHTML = ''
     messageDisplay2('Reset successful!', 'green')
 
     setTimeout(() => {
@@ -154,5 +154,4 @@ btnClear1.addEventListener('click', function () {
 useTemplate = templateFunction({ keepRegs: storeList })
 displayTemplate.innerHTML = useTemplate
 document.addEventListener('DOMContentLoaded', () => {
-
 })
