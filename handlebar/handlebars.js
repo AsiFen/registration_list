@@ -25,6 +25,7 @@ function messageDisplay1(message, className) {
         err_display.classList.add('hidden')
         err_display.style.padding = '0px'
     }
+    
     clearTimeout(errorTimeout1);
     errorTimeout1 = setTimeout(() => {
         err_display.classList.add('hidden')
@@ -40,6 +41,7 @@ function messageDisplay2(message, className) {
         err_display2.style.padding = '15px'
         err_display2.classList.add(className)
     }
+
     clearTimeout(errorTimeout1);
     errorTimeout1 = setTimeout(() => {
         err_display2.classList.remove(className)
@@ -51,8 +53,6 @@ function messageDisplay2(message, className) {
 
 var storeList = [];
 var temp = {}
-
-
 
 if (localStorage['user-reg']) {
     storeList = JSON.parse(localStorage['user-reg'])
@@ -99,11 +99,11 @@ user_registrationElement.addEventListener('input', (e) => {
 
 })
 
-
 dropdown.addEventListener('change', (event) => {
     const { value } = event.target.options[event.target.selectedIndex]
     var townSelectedList = factoryFunction.selectTown(value)
     localStorage[value] = factoryFunction.selectTown(value)
+
     if (factoryFunction.isTownSelected() == '') {
         for (var i = 0; i < townSelectedList.length; i++) {
             localStorage[value] = townSelectedList[i]
@@ -113,6 +113,7 @@ dropdown.addEventListener('change', (event) => {
         useTemplate = templateFunction({ keepRegs: townSelectedList })
         displayTemplate.innerHTML = useTemplate
     }
+
     else {
         clearTimeout(errorTimeout1);
         displayTemplate.innerHTML = ''
@@ -121,11 +122,6 @@ dropdown.addEventListener('change', (event) => {
     }
 })
 
-// if (storeList) {
-//     for (var i = 0; i < storeList.length; i++) {
-//         registrationDisplay(storeList[i])
-//     }
-// }
 
 btnClear1.addEventListener('click', function () {
 

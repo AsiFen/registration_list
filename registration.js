@@ -10,6 +10,7 @@ var dropdownSlected = document.querySelector("select");
 var createDiv = ''
 var createSpan = ''
 var errorTimeout;
+
 function displayRegistrations(registration) {
     createDiv = document.createElement('div')
     createSpan = document.createElement('span')
@@ -54,7 +55,6 @@ function displayMessages2(message, className) {
 
 var storeRegistrations = [];
 var holder = {}
-
 
 
 if (localStorage['user-registration']) {
